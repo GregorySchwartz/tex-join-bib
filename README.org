@@ -1,0 +1,47 @@
+* =tex-join-bib=
+
+** Description
+
+Automatically join several =tex= files together by compiling each file
+separately (to keep their formatting and configuration) but unify their
+bibliographies into a =pdf=. =tex-join-bib= will also output the joined =bib=
+file, bibliography =tex= file, and a =pdf= of the joined references.
+
+** Installation
+
+=tex-join-bib= requires an installation of latex (like =texlive=), =latexmk=,
+and =pdfjam=.
+
+*** Install =stack=
+
+See [[https://docs.haskellstack.org/en/stable/README/]] for more details.
+
+#+BEGIN_SRC sh
+curl -sSL https://get.haskellstack.org/ | sh
+stack setup
+#+END_SRC
+
+*** Install =tex-join-bib=
+
+**** Source
+
+#+BEGIN_SRC sh
+git clone https://github.com/GregorySchwartz/tex-join-bib
+cd tex-join-bib
+stack install
+#+END_SRC
+
+** Usage
+
+First, make sure each file has a global bib pointed to in biblatex in the preamble:
+
+#+BEGIN_SRC latex
+\usepackage{biblatex}
+\addbibresource{/path/to/global_references.bib} 
+#+END_SRC
+
+Then run the program:
+
+#+BEGIN_SRC sh
+tex-join-bib -o output.pdf -i a.tex -i b.tex -i c.tex
+#+END_SRC
